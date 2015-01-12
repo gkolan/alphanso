@@ -11,8 +11,9 @@
 	<script type="text/javascript" src="http://francisshanahan.com/identicon5/jquery.identicon5.packed.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-        $('#text-value').val(makeid());
-			 var textValue = $('#text-value').val().trim();
+            $('#ie-alert').hide();
+            $('#text-value').val(makeid());
+			var textValue = $('#text-value').val().trim();
     		$('#text-value').val(textValue).focus();
     		var hash = CryptoJS.MD5(textValue).toString();
     		$("#profile-image").hide().html(hash).fadeIn(800);
@@ -20,21 +21,40 @@
     		$('canvas').attr('class', 'center-block');
     		$("#generate-identicon").click(function () {
       			var textValue = $('#text-value').val().trim();
-    			  $('#text-value').val(textValue);
-    			  var hash = CryptoJS.MD5(textValue).toString();
-    			  $("#profile-image").hide().html(hash).fadeIn(800);
-    			  $("#profile-image").identicon5({size:800});
-    			  $('canvas').attr('class', 'center-block');
-			  });
-        function makeid(){
-            //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for( var i=0; i < 6; i++ ) {
-              text += possible.charAt(Math.floor(Math.random() * possible.length));
+    			$('#text-value').val(textValue);
+    			var hash = CryptoJS.MD5(textValue).toString();
+    			$("#profile-image").hide().html(hash).fadeIn(800);
+    			$("#profile-image").identicon5({size:800});
+    			$('canvas').attr('class', 'center-block');
+			});
+            if ( (detectIE() == '9') || (detectIE() == '8') || (detectIE() == '7')  || (detectIE() == '6')  || (detectIE() == '5') ) {
+                $( "#ie-alert").slideDown(800);
             }
-            return text;
-        }
+            function detectIE() {
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf('MSIE ');
+                var trident = ua.indexOf('Trident/');
+                if (msie > 0) {
+                    // IE 10 or older => return version number
+                    return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+                }
+                if (trident > 0) {
+                    // IE 11 (or newer) => return version number
+                    var rv = ua.indexOf('rv:');
+                    return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+                }
+                // other browser
+                // return false;
+            }
+            function makeid(){
+                //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                for( var i=0; i < 6; i++ ) {
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+                }
+                return text;
+            }
 		});
 	</script>
 	<style>
@@ -79,9 +99,17 @@
 		.project-color {
 			color: #E0115F;
 		}
+        .alert {
+            margin-bottom: 0px;
+        }
 	</style>
 </head>
 <body>
+    <div class="alert alert-warning" role="alert" id="ie-alert">
+        <div class="container">
+            <strong>Looks bad, isnt it?</strong> HTML5 feature <strong>canvas</strong> does not play well with IE 9 or earlier versions or any IE with compatability mode enabled. Please use Firefox or Chrome.
+        </div>
+    </div>
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
