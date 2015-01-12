@@ -10,7 +10,8 @@
 	<script type="text/javascript" src="http://francisshanahan.com/identicon5/jquery.identicon5.packed.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var textValue = $('#text-value').val().trim();
+        $('#text-value').val(makeid());
+			 var textValue = $('#text-value').val().trim();
     		$('#text-value').val(textValue).focus();
     		var hash = CryptoJS.MD5(textValue).toString();
     		$("#profile-image").hide().html(hash).fadeIn(800);
@@ -18,12 +19,21 @@
     		$('canvas').attr('class', 'center-block');
     		$("#generate-identicon").click(function () {
       			var textValue = $('#text-value').val().trim();
-    			$('#text-value').val(textValue);
-    			var hash = CryptoJS.MD5(textValue).toString();
-    			$("#profile-image").hide().html(hash).fadeIn(800);
-    			$("#profile-image").identicon5({size:800});
-    			$('canvas').attr('class', 'center-block');
-			}); 
+    			  $('#text-value').val(textValue);
+    			  var hash = CryptoJS.MD5(textValue).toString();
+    			  $("#profile-image").hide().html(hash).fadeIn(800);
+    			  $("#profile-image").identicon5({size:800});
+    			  $('canvas').attr('class', 'center-block');
+			  });
+        function makeid(){
+            //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for( var i=0; i < 6; i++ ) {
+              text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return text;
+        }
 		});
 	</script>
 	<style>
