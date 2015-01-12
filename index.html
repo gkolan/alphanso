@@ -17,14 +17,14 @@
     		$("#profile-image").hide().html(hash).fadeIn(800);
     		$("#profile-image").identicon5({size:800});
     		$('canvas').attr('class', 'center-block');
-        $('#text-value').keyup(function() {
-            var textValue = $('#text-value').val().trim();
-            $('#text-value').val(textValue);
-            var hash = CryptoJS.MD5(textValue).toString();
-            $("#profile-image").hide().html(hash).fadeIn(1500);
-            $("#profile-image").identicon5({size:800});
-            $('canvas').attr('class', 'center-block');
-        });
+    		$("#generate-identicon").click(function () {
+      			var textValue = $('#text-value').val().trim();
+    			  $('#text-value').val(textValue);
+    			  var hash = CryptoJS.MD5(textValue).toString();
+    			  $("#profile-image").hide().html(hash).fadeIn(800);
+    			  $("#profile-image").identicon5({size:800});
+    			  $('canvas').attr('class', 'center-block');
+			  });
         function makeid(){
             //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript
             var text = "";
@@ -88,7 +88,8 @@
             </div>
             <div class="navbar-form navbar-left navbar-input-group pull-right">
                 <div class="form-group">
-                    <input type="text" class="form-control col-md-3" id="text-value" value="">
+                    <input type="text" class="form-control col-md-3" id="text-value" value="Gautam Kolan">
+                    <button class="btn btn-danger" id="generate-identicon">Generate</button>
                 </div>
             </div>
             <p class="navbar-text pull-right">
