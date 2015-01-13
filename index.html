@@ -2,7 +2,7 @@
 <html>
 <head>
   	<title>Alphanso | Identicon Generator | Gautam Kolan</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   	<link rel="stylesheet" href="http://getbootstrap.com/examples/sticky-footer-navbar/sticky-footer-navbar.css">
   	<link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
@@ -13,21 +13,21 @@
 		$(document).ready(function() {
             $('#ie-alert').hide();
             $('#text-value').val(makeid());
-			var textValue = $('#text-value').val().trim();
+			var textValue = $.trim($('#text-value').val());
     		$('#text-value').val(textValue).focus();
     		var hash = CryptoJS.MD5(textValue).toString();
     		$("#profile-image").hide().html(hash).fadeIn(800);
     		$("#profile-image").identicon5({size:800});
     		$('canvas').attr('class', 'center-block');
     		$("#generate-identicon").click(function () {
-      			var textValue = $('#text-value').val().trim();
+      			var textValue = $.trim($('#text-value').val());
     			$('#text-value').val(textValue);
     			var hash = CryptoJS.MD5(textValue).toString();
     			$("#profile-image").hide().html(hash).fadeIn(800);
     			$("#profile-image").identicon5({size:800});
     			$('canvas').attr('class', 'center-block');
 			});
-            if ( (detectIE() == '9') || (detectIE() == '8') || (detectIE() == '7')  || (detectIE() == '6')  || (detectIE() == '5') ) {
+            if ( (detectIE() == '10') || (detectIE() == '9') || (detectIE() == '8') || (detectIE() == '7')  || (detectIE() == '6')  || (detectIE() == '5') ) {
                 $( "#ie-alert").slideDown(800);
             }
             function detectIE() {
@@ -105,9 +105,9 @@
 	</style>
 </head>
 <body>
-    <div class="alert alert-warning" role="alert" id="ie-alert">
+    <div class="alert alert-warning" role="alert" id="ie-alert" style="text-align:center;">
         <div class="container">
-            <strong>Looks bad, isnt it?</strong> HTML5 feature <strong>canvas</strong> does not play well with IE 9 or earlier versions or any IE with compatability mode enabled. Please use Firefox or Chrome.
+            <strong>Looks bad, isnt it?</strong> HTML5 attribute <strong>canvas</strong> does not play well with IE 10 or earlier versions. Please use Firefox or Chrome.
         </div>
     </div>
     <nav class="navbar navbar-default">
